@@ -17,7 +17,7 @@ expat:
 glib:
 - '2.58'
 libcurl:
-- '7.64'
+- '7'
 libxml2:
 - '2.9'
 openssl:
@@ -37,6 +37,6 @@ pin_run_as_build:
   zstd:
     max_pin: x.x.x
 python:
-- 2.7.* *_cpython
+- 3.8.* *_cpython
 zstd:
 - 1.4.4
