@@ -1,5 +1,5 @@
 {% set name = "librepo" %}
-{% set version = "1.11.3" %}
+{% set version = "1.12.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rpm-software-management/librepo/archive/{{ version }}.tar.gz
-  sha256: ca30d38ac22a811a27bc86bd28fd2ebc21d3729baa0d7ca15ace248d11507e9b
+  sha256: e26e142582ae32b2f6ee8f1f384f7d502ca9ea416b9db77a76b12f9cf339c133
 
 build:
   number: 0
@@ -80,7 +80,7 @@ about:
   license: LGPL-2.1
   license_family: GPL
   license_file: COPYING
-  summary: 'A library providing C and Python (libcURL like) API for downloading repository metadata and packages'
+  summary: A library providing C and Python (libcURL like) API for downloading repository metadata and packages
   doc_url: https://rpm-software-management.github.io/librepo
 
 extra:
