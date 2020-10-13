@@ -5,11 +5,11 @@ Home: https://github.com/rpm-software-management/librepo
 
 Package license: LGPL-2.1
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/librepo-feedstock/blob/master/LICENSE.txt)
 
 Summary: A library providing C and Python (libcURL like) API for downloading repository metadata and packages
 
-
+Documentation: https://rpm-software-management.github.io/librepo
 
 Current build status
 ====================
@@ -47,6 +47,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=9260&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/librepo-feedstock?branchName=master&jobName=linux&configuration=linux_64_python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=9260&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/librepo-feedstock?branchName=master&jobName=linux&configuration=linux_64_python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
