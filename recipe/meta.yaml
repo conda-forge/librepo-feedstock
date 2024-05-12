@@ -1,5 +1,5 @@
 {% set name = "librepo" %}
-{% set version = "1.12.1" %}
+{% set version = "1.17.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/rpm-software-management/librepo/archive/{{ version }}.tar.gz
-  sha256: b78113f3aeb0d562b034dbeb926609019b7bed27e05c9ab5a584a9938de8da9f
+  sha256: ae707c2b9d72c2eaeecc9a5370273a99987d9c6979517b4ad433ae920b65d993
 
 build:
-  number: 7
+  number: 0
   skip: true  # [win or osx]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x' ) }}
