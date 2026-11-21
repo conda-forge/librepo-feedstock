@@ -1,5 +1,5 @@
 context:
-  version: "1.12.1"
+  version: "1.22.0"
 
 recipe:
   name: librepo-split
@@ -7,14 +7,10 @@ recipe:
 
 source:
   url: https://github.com/rpm-software-management/librepo/archive/${{ version }}.tar.gz
-  sha256: b78113f3aeb0d562b034dbeb926609019b7bed27e05c9ab5a584a9938de8da9f
-  patches:
-    - patches/0001-use-sysconfig-instead-of-distutils.patch
-    - patches/0002-find-gpgme-via-pkg-config.patch
-    - patches/0003-drop-ntlm-test-assertion.patch
+  sha256: ce7ebdc9789ae51f3e7d26b5408de7395ddea0950d5d73568ed9565f5fae4d4c
 
 build:
-  number: 8
+  number: 0
   skip: not linux
 
 outputs:
@@ -24,9 +20,11 @@ outputs:
       build:
         - ${{ compiler('c') }}
         - ${{ stdlib('c') }}
+        - ${{ cdt('libselinux-devel') }}
         - cmake <4
         - make
         - pkgconf
+        - doxygen
       host:
         - libcurl
         - gpgme
@@ -40,8 +38,12 @@ outputs:
         - zlib
         - zstd
         - python
+        - pyxattr
+        - requests
         # gpg binary needed by the C test suite (gpgme shells out to it)
         - gnupg
+        # required for libselinux pkg-config metadata
+        - pcre
     build:
       script: build.sh
 
@@ -87,6 +89,8 @@ outputs:
       run:
         - ${{ pin_subpackage('librepo', exact=True) }}
         - python
+        - pyxattr
+        - requests
       ignore_run_exports:
         by_name:
           - gnupg
