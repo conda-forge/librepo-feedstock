@@ -17,6 +17,6 @@ cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
       -DWITH_ZCHUNK=$LS_USE_ZCHUNK \
       ..
 
-make VERBOSE=1 -j${CPU_COUNT}
-make test
-make install
+cmake --build .
+ctest --progress --output-on-failure || cat ./Testing/Temporary/LastTest.log
+cmake --install .
