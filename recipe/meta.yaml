@@ -1,8 +1,7 @@
-{% set name = "librepo" %}
 {% set version = "1.12.1" %}
 
 package:
-  name: {{ name|lower }}
+  name: librepo
   version: {{ version }}
 
 source:
@@ -13,7 +12,7 @@ build:
   number: 8
   skip: true  # [win or osx]
   run_exports:
-    - {{ pin_subpackage(name, max_pin='x.x' ) }}
+    - {{ pin_subpackage("librepo", max_pin='x.x' ) }}
 
 requirements:
   build:
