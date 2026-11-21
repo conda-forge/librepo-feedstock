@@ -21,7 +21,7 @@ requirements:
     - {{ stdlib("c") }}
     - cmake <4
     - make  # [unix]
-    - pkg-config
+    - pkgconf
   host:
     - libcurl
     - gpgme
