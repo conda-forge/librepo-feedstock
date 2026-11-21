@@ -1,0 +1,3 @@
+# GCC 15 switched to C23 by default, which errors on K&R functions
+c_compiler_version:     # [linux]
+  - 14                  # [linux]
