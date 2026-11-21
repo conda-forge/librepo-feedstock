@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/librepo-feedsto
 
 Home: https://github.com/rpm-software-management/librepo
 
-Package license: LGPL-2.1
+Package license: LGPL-2.1-or-later
 
 Summary: A library providing C and Python (libcURL like) API for downloading repository metadata and packages
 
@@ -192,5 +192,6 @@ Feedstock Maintainers
 
 * [@JohanMabille](https://github.com/JohanMabille/)
 * [@SylvainCorlay](https://github.com/SylvainCorlay/)
+* [@h-vetinari](https://github.com/h-vetinari/)
 * [@wolfv](https://github.com/wolfv/)
 
