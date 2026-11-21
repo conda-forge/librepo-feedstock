@@ -32,6 +32,7 @@ requirements:
     - check
     - zchunk  # [linux]
     - libxml2-devel
+    - zlib
     - zstd
     - python
 
