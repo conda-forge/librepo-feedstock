@@ -80,7 +80,7 @@ outputs:
 
 about:
   home: https://github.com/rpm-software-management/librepo
-  license: LGPL-2.1
+  license: LGPL-2.1-or-later
   license_family: GPL
   license_file: COPYING
   summary: A library providing C and Python (libcURL like) API for downloading repository metadata and packages
