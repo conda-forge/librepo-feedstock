@@ -31,7 +31,7 @@ requirements:
     - glib
     - check
     - zchunk  # [linux]
-    - libxml2
+    - libxml2-devel
     - zstd
     - python
 
