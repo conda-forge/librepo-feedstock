@@ -24,6 +24,7 @@ outputs:
         - cmake <4
         - make
         - pkgconf
+        - doxygen
       host:
         - libcurl
         - gpgme
