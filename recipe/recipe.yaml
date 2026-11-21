@@ -20,6 +20,7 @@ outputs:
       build:
         - ${{ compiler('c') }}
         - ${{ stdlib('c') }}
+        - ${{ cdt('libselinux-devel') }}
         - cmake <4
         - make
         - pkgconf
