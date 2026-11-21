@@ -1,12 +1,13 @@
 #!/bin/bash
+set -ex
 
 mkdir -p build
 cd build
 
 if [[ "$target_platform" == osx* ]]; then
-	export LS_USE_ZCHUNK=OFF;
+    export LS_USE_ZCHUNK=OFF;
 else
-	export LS_USE_ZCHUNK=ON;
+    export LS_USE_ZCHUNK=ON;
 fi
 
 cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
