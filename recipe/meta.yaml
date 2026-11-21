@@ -19,7 +19,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    - cmake
+    - cmake <4
     - make  # [unix]
     - pkg-config
   host:
@@ -54,7 +54,7 @@ outputs:
       - lib/python*/site-packages/librepo/**
     requirements:
       build:
-        - cmake
+        - cmake <4
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
       host:
