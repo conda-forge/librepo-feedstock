@@ -39,6 +39,8 @@ outputs:
         - python
         # gpg binary needed by the C test suite (gpgme shells out to it)
         - gnupg
+        # required for libselinux pkg-config metadata
+        - pcre
     build:
       script: build.sh
 
