@@ -38,6 +38,8 @@ outputs:
         - zlib
         - zstd
         - python
+        - pyxattr
+        - requests
         # gpg binary needed by the C test suite (gpgme shells out to it)
         - gnupg
         # required for libselinux pkg-config metadata
@@ -87,6 +89,8 @@ outputs:
       run:
         - ${{ pin_subpackage('librepo', exact=True) }}
         - python
+        - pyxattr
+        - requests
       ignore_run_exports:
         by_name:
           - gnupg
