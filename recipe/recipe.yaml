@@ -1,0 +1,116 @@
+context:
+  version: "1.12.1"
+
+recipe:
+  name: librepo-split
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rpm-software-management/librepo/archive/${{ version }}.tar.gz
+  sha256: b78113f3aeb0d562b034dbeb926609019b7bed27e05c9ab5a584a9938de8da9f
+  patches:
+    - patches/0001-use-sysconfig-instead-of-distutils.patch
+    - patches/0002-find-gpgme-via-pkg-config.patch
+    - patches/0003-drop-ntlm-test-assertion.patch
+
+build:
+  number: 8
+  skip: not linux
+
+outputs:
+  - staging:
+      name: librepo-build
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - cmake <4
+        - make
+        - pkgconf
+      host:
+        - libcurl
+        - gpgme
+        - attr
+        - openssl
+        - expat
+        - glib
+        - check
+        - zchunk
+        - libxml2-devel
+        - zlib
+        - zstd
+        - python
+        # gpg binary needed by the C test suite (gpgme shells out to it)
+        - gnupg
+    build:
+      script: build.sh
+
+  - package:
+      name: librepo
+    inherit: librepo-build
+    build:
+      files:
+        - lib/librepo*
+        - lib/pkgconfig/librepo*
+        - include/librepo/
+    requirements:
+      run_exports:
+        - ${{ pin_subpackage('librepo', upper_bound='x.x') }}
+      ignore_run_exports:
+        by_name:
+          - python_abi
+          - gnupg
+          - libattr
+          - libexpat
+          - libzlib
+          - zstd
+    tests:
+      - package_contents:
+          include:
+            - librepo/librepo.h
+            - librepo/checksum.h
+          lib:
+            - librepo
+          files:
+            - lib/pkgconfig/librepo.pc
+
+  - package:
+      name: py-librepo
+    inherit: librepo-build
+    build:
+      files:
+        - lib/python*/site-packages/librepo/
+    requirements:
+      host:
+        - ${{ pin_subpackage('librepo', exact=True) }}
+        - python
+      run:
+        - ${{ pin_subpackage('librepo', exact=True) }}
+        - python
+      ignore_run_exports:
+        by_name:
+          - gnupg
+          - libattr
+          - libexpat
+          - libzlib
+          - zstd
+    tests:
+      - python:
+          imports:
+            - librepo
+          pip_check: false
+
+about:
+  homepage: https://github.com/rpm-software-management/librepo
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: A library providing C and Python (libcURL like) API for downloading repository metadata and packages
+  documentation: https://rpm-software-management.github.io/librepo
+
+extra:
+  feedstock-name: librepo
+  recipe-maintainers:
+    - wolfv
+    - JohanMabille
+    - SylvainCorlay
+    - h-vetinari

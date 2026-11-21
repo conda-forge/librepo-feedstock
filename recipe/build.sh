@@ -1,22 +1,21 @@
 #!/bin/bash
+set -euxo pipefail
 
 mkdir -p build
 cd build
 
-if [[ "$target_platform" == osx* ]]; then
-	export LS_USE_ZCHUNK=OFF;
-else
-	export LS_USE_ZCHUNK=ON;
-fi
-
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
+cmake ${CMAKE_ARGS} \
+      -DCMAKE_INSTALL_PREFIX=$PREFIX \
       -DCMAKE_PREFIX_PATH=$PREFIX \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DBUILD_SHARED_LIBS=ON \
       -DCMAKE_BUILD_TYPE=Release \
-      -DWITH_ZCHUNK=$LS_USE_ZCHUNK \
+      -DWITH_ZCHUNK=ON \
+      -DENABLE_DOCS=OFF \
       ..
 
-make VERBOSE=1 -j${CPU_COUNT}
-make test
-make install
+cmake --build . -j${CPU_COUNT}
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
+  ctest --progress --output-on-failure || (cat ./Testing/Temporary/LastTest.log && exit 1)
+fi
+cmake --install .

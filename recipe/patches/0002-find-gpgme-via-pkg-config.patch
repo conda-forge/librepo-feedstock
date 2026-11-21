@@ -1,0 +1,42 @@
+From b26469358a34a514f62b26552db5a4c1398fb022 Mon Sep 17 00:00:00 2001
+From: conda-forge <conda-forge@users.noreply.github.com>
+Date: Sat, 21 Nov 2026 08:14:36 +0100
+Subject: [PATCH] Find gpgme via pkg-config
+
+gpgme 2.x no longer ships gpgme-config, so the bundled FindGpgme.cmake
+finds nothing and librepo.so ends up not linked against libgpgme.
+---
+ CMakeLists.txt         | 3 ++-
+ librepo/CMakeLists.txt | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e949dbe..943f157 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -31,7 +31,8 @@ PKG_CHECK_MODULES(GLIB2 glib-2.0 REQUIRED)
+ PKG_SEARCH_MODULE(LIBCRYPTO REQUIRED libcrypto openssl)
+ PKG_CHECK_MODULES(LIBXML2 libxml-2.0 REQUIRED)
+ FIND_PACKAGE(CURL REQUIRED)
+-FIND_PACKAGE(Gpgme REQUIRED)
++PKG_CHECK_MODULES(GPGME gpgme REQUIRED)
++INCLUDE_DIRECTORIES(${GPGME_INCLUDE_DIRS})
+ 
+ 
+ IF (WITH_ZCHUNK)
+diff --git a/librepo/CMakeLists.txt b/librepo/CMakeLists.txt
+index 73edf70..08c1ec5 100644
+--- a/librepo/CMakeLists.txt
++++ b/librepo/CMakeLists.txt
+@@ -50,7 +50,7 @@ TARGET_LINK_LIBRARIES(librepo
+                         ${LIBXML2_LIBRARIES}
+                         ${CURL_LIBRARY}
+                         ${LIBCRYPTO_LIBRARIES}
+-                        ${GPGME_VANILLA_LIBRARIES}
++                        ${GPGME_LDFLAGS}
+                         ${GLIB2_LIBRARIES}
+                      )
+ IF (WITH_ZCHUNK)
+-- 
+2.56.0
+
